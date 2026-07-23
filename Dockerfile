@@ -13,6 +13,7 @@ COPY show-service/pom.xml show-service/
 COPY seat-service/pom.xml seat-service/
 COPY booking-service/pom.xml booking-service/
 COPY payment-service/pom.xml payment-service/
+COPY server/pom.xml server/
 
 COPY api-gateway/src api-gateway/src
 COPY user-service/src user-service/src
@@ -22,6 +23,7 @@ COPY show-service/src show-service/src
 COPY seat-service/src seat-service/src
 COPY booking-service/src booking-service/src
 COPY payment-service/src payment-service/src
+COPY server/src server/src
 
 RUN mvn clean package -DskipTests --no-transfer-progress
 
@@ -29,15 +31,8 @@ RUN mvn clean package -DskipTests --no-transfer-progress
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Copy built JAR files from builder
-COPY --from=builder /build/api-gateway/target/*.jar /app/api-gateway.jar
-COPY --from=builder /build/user-service/target/*.jar /app/user-service.jar
-COPY --from=builder /build/movie-service/target/*.jar /app/movie-service.jar
-COPY --from=builder /build/screen-service/target/*.jar /app/screen-service.jar
-COPY --from=builder /build/show-service/target/*.jar /app/show-service.jar
-COPY --from=builder /build/seat-service/target/*.jar /app/seat-service.jar
-COPY --from=builder /build/booking-service/target/*.jar /app/booking-service.jar
-COPY --from=builder /build/payment-service/target/*.jar /app/payment-service.jar
+# Copy unified server JAR
+COPY --from=builder /build/server/target/*.jar /app/server.jar
 
 # Copy entrypoint script and normalize line endings for Linux
 COPY start_services.sh /app/start_services.sh

@@ -1,0 +1,21 @@
+# Maven target directories and JARs
+target/
+**/target/
+*.jar
+*.war
+
+# Node & Frontend build output
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+
+# Logs & Temporary files
+*.log
+.DS_Store
+.mvn/
+.idea/
+*.iml
+.classpath
+.project
+.settings/

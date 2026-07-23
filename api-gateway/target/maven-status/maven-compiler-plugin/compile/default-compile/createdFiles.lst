@@ -1,4 +1,0 @@
-com/bookmyshow/gateway/security/JwtUtil.class
-com/bookmyshow/gateway/security/JwtAuthenticationFilter.class
-com/bookmyshow/gateway/ApiGatewayApplication.class
-com/bookmyshow/gateway/config/GatewayConfig.class
