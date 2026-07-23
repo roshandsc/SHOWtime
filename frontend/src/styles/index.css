@@ -1,0 +1,22 @@
+/* Centralized Application Styles */
+@import '../../css/base/variables.css';
+@import '../../css/base/reset.css';
+@import '../../css/base/typography.css';
+@import '../../css/base/style.css';
+
+@import '../../css/components/navbar.css';
+@import '../../css/components/footer.css';
+@import '../../css/components/hero.css';
+@import '../../css/components/cards.css';
+@import '../../css/components/buttons.css';
+@import '../../css/components/badges.css';
+@import '../../css/components/modals.css';
+@import '../../css/components/skeleton.css';
+@import '../../css/components/toast.css';
+
+@import '../../css/pages/home.css';
+@import '../../css/pages/movie-details.css';
+@import '../../css/pages/seat-selection.css';
+@import '../../css/pages/login.css';
+@import './my-bookings.css';
+@import './wishlist-page.css';

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: showtime-backend
+    env: docker
+    plan: free
+    region: singapore
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: JWT_SECRET
+        value: bookmyshowsecretkey1234567890123456789012
+      - key: MYSQL_HOST
+        value: mysql-290336e1-roshan-470a.h.aivencloud.com
+      - key: MYSQL_PORT
+        value: "23215"
+      - key: MYSQL_DATABASE
+        value: defaultdb
+      - key: MYSQL_USER
+        value: avnadmin
+      - key: MYSQL_PASSWORD
+        value: AVNS_Muc_NIewX-1nVmwhWcq
