@@ -2,6 +2,8 @@
 FROM maven:3.9-eclipse-temurin-17 AS builder
 WORKDIR /build
 
+ENV MAVEN_OPTS="-Xmx512m -XX:+UseSerialGC"
+
 COPY pom.xml .
 COPY api-gateway/pom.xml api-gateway/
 COPY user-service/pom.xml user-service/
@@ -21,7 +23,7 @@ COPY seat-service/src seat-service/src
 COPY booking-service/src booking-service/src
 COPY payment-service/src payment-service/src
 
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests --no-transfer-progress
 
 # ── STAGE 2: Lightweight Runtime Image ──────────────────────────
 FROM eclipse-temurin:17-jre-alpine
@@ -37,10 +39,10 @@ COPY --from=builder /build/seat-service/target/*.jar /app/seat-service.jar
 COPY --from=builder /build/booking-service/target/*.jar /app/booking-service.jar
 COPY --from=builder /build/payment-service/target/*.jar /app/payment-service.jar
 
-# Copy entrypoint script
+# Copy entrypoint script and normalize line endings for Linux
 COPY start_services.sh /app/start_services.sh
-RUN chmod +x /app/start_services.sh
+RUN tr -d '\r' < /app/start_services.sh > /app/start.sh && chmod +x /app/start.sh
 
 EXPOSE 8080
 
-ENTRYPOINT ["/app/start_services.sh"]
+ENTRYPOINT ["/app/start.sh"]
